@@ -1,9 +1,6 @@
-package org.razondark.tgbot.service
+package org.razondark.tgbot.handler
 
 import mu.KotlinLogging
-import org.razondark.tgbot.handler.MessageHandler
-import org.razondark.tgbot.handler.TgBotCommandHandler
-import org.razondark.tgbot.handler.TgBotTextMessageHandler
 import org.razondark.tgbot.props.TgBotProperties
 import org.springframework.stereotype.Service
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
