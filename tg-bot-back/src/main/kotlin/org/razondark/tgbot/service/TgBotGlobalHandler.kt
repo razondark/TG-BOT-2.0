@@ -35,7 +35,15 @@ class TgBotGlobalHandler(
         executeAsync(handler.buildCommandQuery(message))
     }.onFailure {
         log.error {
-            "Error while executing command ${message.text}, chatId: ${message.chatId}: ${it.message}"
+            """
+                Error answer: ${message.text};
+                chatId: ${message.chatId}: ${it.message};
+                sender: {
+                    id: ${message.from.id}
+                    nickname: ${message.from.userName}
+                }
+                stackTrace: ${it.stackTrace}
+            """.trimIndent()
         }
     }
 
