@@ -6,15 +6,16 @@ import org.razondark.tgbot.handler.TgBotCommandHandler
 import org.razondark.tgbot.handler.TgBotTextMessageHandler
 import org.razondark.tgbot.props.TgBotProperties
 import org.springframework.stereotype.Service
+import org.telegram.telegrambots.bots.TelegramLongPollingBot
 import org.telegram.telegrambots.meta.api.objects.Message
 import org.telegram.telegrambots.meta.api.objects.Update
 
 @Service
-class TgBotMessageService(
-    tgBotProperties: TgBotProperties,
+class TgBotGlobalHandler(
+    private val tgBotProperties: TgBotProperties,
     private val tgBotCommandsHandler: TgBotCommandHandler,
     private val tgBotTextMessageHandler: TgBotTextMessageHandler
-) : TgBotAbstract(tgBotProperties) {
+) : TelegramLongPollingBot(tgBotProperties.token) {
 
     private val log = KotlinLogging.logger {}
 
@@ -37,4 +38,6 @@ class TgBotMessageService(
             "Error while executing command ${message.text}, chatId: ${message.chatId}: ${it.message}"
         }
     }
+
+    override fun getBotUsername(): String = tgBotProperties.name
 }
