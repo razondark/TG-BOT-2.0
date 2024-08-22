@@ -1,0 +1,18 @@
+services:
+  tg-bot-back:
+    container_name: tg-bot-back
+    build:
+      context: ./
+      dockerfile: tg-bot-back/Dockerfile
+    image: tg-bot-back
+    environment:
+      - JAVA_OPTS=-Xmx512M
+      - TG_BOT_NAME=${TG_BOT_NAME}
+      - TG_BOT_TOKEN=${TG_BOT_TOKEN}
+    restart: on-failure
+    networks:
+      - bot_network
+
+networks:
+  bot_network:
+    driver: bridge
