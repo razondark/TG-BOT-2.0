@@ -1,0 +1,12 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: tg-bot-back
+  config:
+    import: optional:file:.env[.properties]
+
+tg-bot:
+  name: ${TG_BOT_NAME}
+  token: ${TG_BOT_TOKEN}
