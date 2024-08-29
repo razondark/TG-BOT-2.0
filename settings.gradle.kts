@@ -4,3 +4,4 @@ plugins {
 rootProject.name = "tg-bot"
 
 include("tg-bot-back")
+include("crud-microservice")

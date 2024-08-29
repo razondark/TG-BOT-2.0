@@ -3,6 +3,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.6" apply false
 	kotlin("jvm") version "1.9.23" apply false
 	kotlin("plugin.spring") version "1.9.23" apply false
+	//id("io.gitlab.arturbosch.detekt") version "1.23.6" apply false
 	id("java")
 }
 
@@ -16,6 +17,7 @@ allprojects {
 }
 
 subprojects {
+	//apply(plugin = "io.gitlab.arturbosch.detekt")
 	apply(plugin = "org.springframework.boot")
 	apply(plugin = "io.spring.dependency-management")
 	apply(plugin = "org.jetbrains.kotlin.jvm")
@@ -31,15 +33,24 @@ subprojects {
 		kotlinOptions.freeCompilerArgs += "-Xjsr305=strict"
 	}
 
+//	tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
+//		parallel = true
+//		autoCorrect = true
+//	}
+
 	dependencies {
 		//implementation("org.springframework.boot:spring-boot-configuration-processor")
 		//runtimeOnly("org.springframework.boot:spring-boot-devtools")
 		implementation("org.springframework.boot:spring-boot-starter")
+		implementation("org.springframework.boot:spring-boot-starter-web")
 		implementation("org.jetbrains.kotlin:kotlin-reflect")
 		testImplementation("org.springframework.boot:spring-boot-starter-test")
 		testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 		testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 		implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
+
+		runtimeOnly("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.6")
+		implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.23.6")
 	}
 
 	tasks.withType<Test> {
