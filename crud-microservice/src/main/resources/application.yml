@@ -13,8 +13,8 @@ spring:
     password: ${PG_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create-drop # none
     show-sql: false
   liquibase:
-    enabled: true
+    enabled: false # true
     change-log: classpath:/db/changelog/changelog.xml

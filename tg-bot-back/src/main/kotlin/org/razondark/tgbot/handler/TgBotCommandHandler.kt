@@ -7,7 +7,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage
 import org.telegram.telegrambots.meta.api.objects.Message
 
 @Service
-class TgBotCommandHandler : MessageHandler{
+class TgBotCommandHandler : MessageHandler {
 
     override fun buildCommandQuery(
         message: Message,

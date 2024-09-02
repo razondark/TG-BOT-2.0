@@ -3,6 +3,8 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.6" apply false
 	kotlin("jvm") version "1.9.23" apply false
 	kotlin("plugin.spring") version "1.9.23" apply false
+	kotlin("plugin.jpa") version "1.9.23" apply false
+	kotlin("plugin.allopen") version "2.0.20" apply false
 	//id("io.gitlab.arturbosch.detekt") version "1.23.6" apply false
 	id("java")
 }
@@ -22,6 +24,13 @@ subprojects {
 	apply(plugin = "io.spring.dependency-management")
 	apply(plugin = "org.jetbrains.kotlin.jvm")
 	apply(plugin = "org.jetbrains.kotlin.plugin.spring")
+	apply(plugin = "org.jetbrains.kotlin.plugin.allopen")
+
+	configure<org.jetbrains.kotlin.allopen.gradle.AllOpenExtension> {
+		annotation("jakarta.persistence.Entity")
+		annotation("jakarta.persistence.Embeddable")
+		annotation("jakarta.persistence.MappedSuperclass")
+	}
 
 	java {
 		sourceCompatibility = JavaVersion.VERSION_17
@@ -44,6 +53,7 @@ subprojects {
 		implementation("org.springframework.boot:spring-boot-starter")
 		implementation("org.springframework.boot:spring-boot-starter-web")
 		implementation("org.jetbrains.kotlin:kotlin-reflect")
+		implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
 		testImplementation("org.springframework.boot:spring-boot-starter-test")
 		testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 		testRuntimeOnly("org.junit.platform:junit-platform-launcher")
